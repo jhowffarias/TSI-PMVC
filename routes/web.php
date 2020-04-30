@@ -6,7 +6,7 @@ Route::get('/', function () {
 });
 
 Route::get('/avisos', function () {
-    return view('avisos', ['nome' => 'Jonathan', 'mostrar' => 'true', 'avisos' => [['id' => 1, 'texto' => 'Aviso 1'],
+    return view('avisos', ['nome' => 'Bruno', 'mostrar' => 'true', 'avisos' => [['id' => 1, 'texto' => 'Aviso 1'],
                                                                                 ['id' => 2, 'texto' => 'Aviso 2']]]);
 });
 
@@ -22,6 +22,14 @@ Route::group(['prefix' => 'produtos'], function () {
 
 });
 
+Route::group(['middleware' => ['auth']],function(){
+    Route::resource('users','UserController');
+    Route::resource('roles','RoleController');
+});
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
